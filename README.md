@@ -67,3 +67,6 @@ This *should* run in most any bash environment. It's been tested under Windows w
 ## Credits
 
 The original source was obtained from https://github.com/eliranbz/bash_create_random_files_and_folders. It provided insight into `mktemp()` and `/dev/urandom`.
+
+---
+<img src="http://webexperiment.info/extcounter/mdcount.php?id=bash-random_folder_tree">
