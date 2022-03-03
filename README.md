@@ -22,10 +22,10 @@ These are the features as compared to its [ancestor](https://github.com/eliranbz
     * "script running" check and notification via the "mailer"
     * the "Removing Spaces" code, random file contents are no longer filtered
     * the MD5 file creation
-* hard coded values -  
-  * quantities of folders and files are now kept in variables
-  * random file size range is now kept in variables
-  * the name of the containing folder is now kept in a variable
+  * hard coded values -  
+    * quantities of folders and files are now kept in variables
+    * random file size range is now kept in variables
+    * the name of the containing folder is now kept in a variable
 * the bulk of the `stdout` messages can now be muted
 * renamed some variables
 * the tree that is created is deeper than the original
@@ -52,8 +52,8 @@ EXTS=(md log json js php jpg png html css)
 
 ```
 # "mutable" echoing
-
 SILENT=true
+
 mutecho() {
     if [ "$SILENT" = true ]; then
         return
