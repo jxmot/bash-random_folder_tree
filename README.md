@@ -66,6 +66,8 @@ mutecho() {
 
 This *should* run in most any bash environment. It's been tested under Windows with the Gitbash shell.
 
+**NOTE:** Copy the script into a folder where you want the tree to be created. The script will create a *new* folder with the tree inside of it. The new folder will be named with the value of `BASENAME` in the script.
+
 ## Credits
 
 The original source was obtained from https://github.com/eliranbz/bash_create_random_files_and_folders. It provided insight into `mktemp()` and `/dev/urandom`.
