@@ -43,7 +43,19 @@ MINSIZE=2000
 # the containing folder for the random tree
 BASENAME=randtree
 # extensions for the random files
-EXTS=(md log json js php jpg png html css)
+EXTS=(md log json js php jpg png html css txt)
+###########################################################
+# optional, will increment a count for each EXTS used and 
+# show it at the end
+INVEN=true
+# this will use the EXTS array to build an array of counters
+if [ "$INVEN" = true ]; then
+    declare -A ext_inven
+    for ext in "${EXTS[@]}"
+    do
+        ext_inven+=(["$ext"]=0)
+    done
+fi
 ###########################################################
 # "mutable" echoing
 SILENT=true
@@ -68,13 +80,20 @@ mkranfiles() {
     num_EXTS=${#EXTS[*]}
     for i in $(seq 1 $NUMRFILES)
     do
-        # Random file name
-		fname=`mktemp -u XXXXXXX."${EXTS[$((RANDOM%num_EXTS))]}"`
+        # Random file extension
+        fext="${EXTS[$((RANDOM%num_EXTS))]}"
+        # Random file name and extension
+		fname=`mktemp -u XXXXXXX."$fext"`
 		# Random file size within a specific range
 		fsize=$(($MINSIZE + $RANDOM % $MAXSIZE))
 		# Add random content to files using allowed chars
         cat /dev/urandom |tr -dc A-Z-a-z-0-9-" " | head -c${1:-$fsize} > $fname
 		mutecho $fname
+        if [ "$INVEN" = true ]; then
+            tmp=${ext_inven[$fext]}
+            tmp=$((tmp+=1))
+            ext_inven+=([$fext]=$tmp)
+        fi
     done
 }
 # make a filled random folder tree
@@ -111,3 +130,9 @@ do
 done
 echo "Finshed in $PWD"
 
+# show how many of each file extension we created
+if [ "$INVEN" = true ]; then
+    echo
+    echo "File Extension Counts:"
+    for x in "${!ext_inven[@]}"; do printf "[%s] = %s\n" "$x" "${ext_inven[$x]}" ; done
+fi
