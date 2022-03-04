@@ -51,6 +51,20 @@ EXTS=(md log json js php jpg png html css)
 ```
 
 ```
+# optional, will increment a count for each EXTS used and 
+# show it at the end
+INVEN=true
+# this will use the EXTS array to build an array of counters
+if [ "$INVEN" = true ]; then
+    declare -A ext_inven
+    for ext in "${EXTS[@]}"
+    do
+        ext_inven+=(["$ext"]=0)
+    done
+fi
+```
+
+```
 # "mutable" echoing
 SILENT=true
 
@@ -67,6 +81,35 @@ mutecho() {
 This *should* run in most any bash environment. It's been tested under Windows with the Gitbash shell.
 
 **NOTE:** Copy the script into a folder where you want the tree to be created. The script will create a *new* folder with the tree inside of it. The new folder will be named with the value of `BASENAME` in the script.
+
+### Output Example
+
+```
+$ ./randtree.sh
+Creating 5 random files in /scrap/recursmall_sub/recursmall_sub
+Creating 2 random folders in /scrap/recursmall_sub/recursmall_sub
+Creating 5 random files in /scrap/recursmall_sub/recursmall_sub/JayWb6z
+Creating 5 random files in /scrap/recursmall_sub/recursmall_sub/vFHfuNs
+Creating 2 random folders in /scrap/recursmall_sub/recursmall_sub/JayWb6z
+Creating 5 random files in /scrap/recursmall_sub/recursmall_sub/JayWb6z/1TU6tMN
+Creating 5 random files in /scrap/recursmall_sub/recursmall_sub/JayWb6z/KK4TXlF
+Creating 2 random folders in /scrap/recursmall_sub/recursmall_sub/vFHfuNs
+Creating 5 random files in /scrap/recursmall_sub/recursmall_sub/vFHfuNs/L5eKZ4y
+Creating 5 random files in /scrap/recursmall_sub/recursmall_sub/vFHfuNs/T3ANT2x
+Finshed in /scrap/recursmall_sub/recursmall_sub
+
+File Inventory
+[html] = 2
+[jpg] = 3
+[log] = 4
+[txt] = 5
+[js] = 2
+[json] = 6
+[php] = 3
+[css] = 5
+[md] = 2
+[png] = 3
+```
 
 ## Credits
 
